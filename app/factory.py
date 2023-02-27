@@ -6,7 +6,6 @@ from flask_cors import CORS
 ##from flask_jwt_extended import JWTManager
 from bson import json_util, ObjectId
 from datetime import datetime, timedelta
-from app.api.movies import movies_api_v1
 from app.api.orders import orders_api_v1
 
 
@@ -24,7 +23,6 @@ def create_app():
     app = Flask(__name__)
     CORS(app)
     app.json_encoder = MongoJsonEncoder
-    app.register_blueprint(movies_api_v1)
     app.register_blueprint(orders_api_v1)
 
     @app.route('/')
