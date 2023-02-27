@@ -18,9 +18,9 @@ class MongoJsonEncoder(JSONEncoder):
         return json_util.default(obj, json_util.CANONICAL_JSON_OPTIONS)
 
 
-def create_app():
+def create_app(mongo_uri):
     app = Flask(__name__)
-    mongo.init_app(app, uri='mongodb://localhost:27017/')
+    mongo.init_app(app, uri=mongo_uri)
     CORS(app)
     app.json_encoder = MongoJsonEncoder
     app.register_blueprint(orders_api_v1)
