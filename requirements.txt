@@ -3,3 +3,4 @@ pymongo
 Flask-PyMongo
 Flask-Cors
 faker
+Werkzeug
