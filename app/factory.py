@@ -1,4 +1,5 @@
 import os
+from flask_pymongo import PyMongo
 from flask import Flask
 from flask.json import JSONEncoder
 from flask_cors import CORS
@@ -7,6 +8,7 @@ from flask_cors import CORS
 from bson import json_util, ObjectId
 from datetime import datetime, timedelta
 from app.api.orders import orders_api_v1
+from app.database import mongo
 
 
 class MongoJsonEncoder(JSONEncoder):
@@ -19,8 +21,8 @@ class MongoJsonEncoder(JSONEncoder):
 
 
 def create_app():
-    APP_DIR = os.path.abspath(os.path.dirname(__file__))
     app = Flask(__name__)
+    mongo.init_app(app, uri='mongodb://localhost:27017/')
     CORS(app)
     app.json_encoder = MongoJsonEncoder
     app.register_blueprint(orders_api_v1)

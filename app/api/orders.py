@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from app.db import get_a_order
+from app.database import mongo
 from flask_cors import CORS
 from app.api.utils import expect
 from datetime import datetime
@@ -11,9 +12,9 @@ CORS(orders_api_v1)
 
 @orders_api_v1.route('/', methods=['GET'])
 def api_get_orders():
-    order = get_a_order()
+    order = mongo.cx['sticky'].orders.find_one({})
     response = {
-        "order": order,
+        "order": dict(order),
         "page": 0,
     }
     return jsonify(response)
