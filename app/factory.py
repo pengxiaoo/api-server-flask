@@ -1,12 +1,10 @@
-import os
-from flask_pymongo import PyMongo
 from flask import Flask
 from flask.json import JSONEncoder
 from flask_cors import CORS
 ##from flask_bcrypt import Bcrypt
 ##from flask_jwt_extended import JWTManager
 from bson import json_util, ObjectId
-from datetime import datetime, timedelta
+from datetime import datetime
 from app.api.orders import orders_api_v1
 from app.database import mongo
 
