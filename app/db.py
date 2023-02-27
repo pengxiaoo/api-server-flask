@@ -33,6 +33,13 @@ def get_db():
 db = LocalProxy(get_db)
 
 
+def get_a_order():
+    try:
+        return dict(db.orders.find_one({}))
+    except Exception as e:
+        return e
+
+
 def get_movies_by_country(countries):
     """
     Finds and returns movies by country.
