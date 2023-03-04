@@ -11,5 +11,5 @@
 - deploy to public access
 - authentication
 - log system
-[- throttling
-](http://127.0.0.1:5000/api/v1/midigator/order)- run as docker container
+- throttling
+- run as docker container
