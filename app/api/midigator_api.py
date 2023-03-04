@@ -37,7 +37,7 @@ def api_chargeback_new():
     return make_response(jsonify(data), 200)
 
 
-@midigator_api_v1.route('/', methods=['GET'])
+@midigator_api_v1.route('/order', methods=['GET'])
 def api_get_orders():
     order = get_col('orders', 'sticky').find_one({})
     response = {
