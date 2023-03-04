@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify, make_response
 from flask.json import JSONEncoder
 from flask_cors import CORS
 ##from flask_bcrypt import Bcrypt
@@ -27,6 +27,8 @@ def create_app(mongo_uri):
 
     @app.route('/')
     def home():
-        return "Hello, World!"
+        data = {'ack': 'successfully received /!'}
+        print(data)
+        return make_response(jsonify(data), 200)
 
     return app

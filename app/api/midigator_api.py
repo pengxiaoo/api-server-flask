@@ -12,7 +12,7 @@ CORS(midigator_api_v1)
 def get_col(col_name, db_name='midigator'):
     return mongo.cx[db_name][col_name]
 
-
+    
 @midigator_api_v1.route('/registration-new-event', methods=['POST'])
 def api_registration_new():
     body = request.get_json()
