@@ -3,8 +3,9 @@ import os
 import configparser
 
 config = configparser.ConfigParser()
-config.read(os.path.abspath(os.path.join(".ini")))
-mongo_uri = config['PROD']['DB_URI']
+# config.read(os.path.abspath(os.path.join(".ini")))
+# mongo_uri = config['PROD']['DB_URI']
+mongo_uri = 'mongodb://localhost:27017/'
 app = create_app(mongo_uri)
 app.config['DEBUG'] = True
 app.config['MONGO_URI'] = mongo_uri
