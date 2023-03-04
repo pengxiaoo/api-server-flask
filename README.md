@@ -1,7 +1,10 @@
 ## how to test:
 
 - run run.py
-- open browser with link http://127.0.0.1:5000/api/v1/midigator/ or http://127.0.0.1:5000/api/v1/midigator/order or http://127.0.0.1:5000/api/v1/midigator/user
+- open browser and test the following links:
+  - http://127.0.0.1:5000/api/v1/midigator/
+  - http://127.0.0.1:5000/api/v1/midigator/order (required mongodb)
+  - http://127.0.0.1:5000/api/v1/midigator/user (required mongodb)
 
 ## to do:
 
