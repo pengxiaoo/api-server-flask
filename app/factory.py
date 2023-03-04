@@ -5,7 +5,7 @@ from flask_cors import CORS
 ##from flask_jwt_extended import JWTManager
 from bson import json_util, ObjectId
 from datetime import datetime
-from app.api.orders import orders_api_v1
+from app.api.midigator_api import midigator_api_v1
 from app.database import mongo
 
 
@@ -23,7 +23,7 @@ def create_app(mongo_uri):
     mongo.init_app(app, uri=mongo_uri)
     CORS(app)
     app.json_encoder = MongoJsonEncoder
-    app.register_blueprint(orders_api_v1)
+    app.register_blueprint(midigator_api_v1)
 
     @app.route('/')
     def home():
