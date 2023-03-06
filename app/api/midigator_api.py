@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, make_response
 from app.database import mongo
 from flask_cors import CORS
+from functools import wraps
 from app.api.utils import expect
 from datetime import datetime
 
@@ -11,6 +12,17 @@ CORS(midigator_api_v1)
 
 def get_col(col_name, db_name='midigator'):
     return mongo.cx[db_name][col_name]
+
+
+def auth_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth = request.authorization
+        if auth and auth.username == 'username' and auth.password == 'password':
+            return f(*args, **kwargs)
+        return make_response('basic auth failed, check your username and password!', 401)
+
+    return decorated
 
 
 @midigator_api_v1.route('/', methods=['GET'])
@@ -79,6 +91,7 @@ def api_prevention_match():
 
 
 @midigator_api_v1.route('/order', methods=['GET'])
+@auth_required
 def api_get_orders():
     order = get_col('orders', 'sticky').find_one({})
     response = {
@@ -89,6 +102,7 @@ def api_get_orders():
 
 
 @midigator_api_v1.route('/user', methods=['GET'])
+@auth_required
 def api_get_user():
     user = get_col('EmailUnsubscriber', 'user').find_one({})
     response = {

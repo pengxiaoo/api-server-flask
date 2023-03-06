@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify, request, make_response
 from flask.json import JSONEncoder
 from flask_cors import CORS
 ##from flask_bcrypt import Bcrypt
