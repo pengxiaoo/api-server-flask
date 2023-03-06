@@ -1,31 +1,14 @@
 from flask import Blueprint, request, jsonify, make_response
-from app.database import mongo
 from flask_cors import CORS
-from functools import wraps
-from app.api.utils import expect
-from datetime import datetime
+from app.api.utils import get_col, auth_required
 
 midigator_api_v1 = Blueprint(
     'midigator_api_v1', 'midigator_api_v1', url_prefix='/api/v1/midigator')
 CORS(midigator_api_v1)
 
 
-def get_col(col_name, db_name='midigator'):
-    return mongo.cx[db_name][col_name]
-
-
-def auth_required(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        auth = request.authorization
-        if auth and auth.username == 'username' and auth.password == 'password':
-            return f(*args, **kwargs)
-        return make_response('basic auth failed, check your username and password!', 401)
-
-    return decorated
-
-
 @midigator_api_v1.route('/', methods=['GET'])
+@auth_required
 def api_hello():
     response = {
         "greetings": "you have setup flask successfully! you need to install mongodb if you haven't done so!",
@@ -35,6 +18,7 @@ def api_hello():
 
 
 @midigator_api_v1.route('/', methods=['POST'])
+@auth_required
 def api_registration_new():
     body = request.get_json()
     print(body)
@@ -43,6 +27,7 @@ def api_registration_new():
 
 
 @midigator_api_v1.route('/chargeback-new-event', methods=['POST'])
+@auth_required
 def api_chargeback_new():
     body = request.get_json()
     print(body)
@@ -51,6 +36,7 @@ def api_chargeback_new():
 
 
 @midigator_api_v1.route('/chargeback-match-event', methods=['POST'])
+@auth_required
 def api_chargeback_match():
     body = request.get_json()
     print(body)
@@ -59,6 +45,7 @@ def api_chargeback_match():
 
 
 @midigator_api_v1.route('/order-validation-new-event', methods=['POST'])
+@auth_required
 def api_order_validation_new():
     body = request.get_json()
     print(body)
@@ -67,6 +54,7 @@ def api_order_validation_new():
 
 
 @midigator_api_v1.route('/order-validation-match-event', methods=['POST'])
+@auth_required
 def api_order_validation_match():
     body = request.get_json()
     print(body)
@@ -75,6 +63,7 @@ def api_order_validation_match():
 
 
 @midigator_api_v1.route('/prevention-new-event', methods=['POST'])
+@auth_required
 def api_prevention_new():
     body = request.get_json()
     print(body)
@@ -83,6 +72,7 @@ def api_prevention_new():
 
 
 @midigator_api_v1.route('/prevention-match-event', methods=['POST'])
+@auth_required
 def api_prevention_match():
     body = request.get_json()
     print(body)
