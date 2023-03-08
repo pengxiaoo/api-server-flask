@@ -14,6 +14,8 @@ def log(text, level='WARNING'):
         logging.warning(text)
     elif level == 'ERROR':
         logging.error(text)
+    else:
+        logging.info(text)
 
 
 (username, password) = (os.environ['MIDIGATOR_SANDBOX_USERNAME'], os.environ['MIDIGATOR_SANDBOX_PASSWORD'])
